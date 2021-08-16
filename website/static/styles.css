@@ -117,7 +117,7 @@ body
     text-align: center;
 }
 
-p[x-apple-data-detectors] {
+span[x-apple-data-detectors] {
     opacity: 0 !important;
     cursor: not-allowed !important;
     pointer-events: none !important;
