@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}
+    TodoTimer: Completed Todos
+{% endblock %}
+
+{% block content %}
+    <h2 class="feature-title mb-4">Completed Todos</h2>
+    <hr>
+    <br>
+    <ul class="list-group list-group-flush" id="todos">
+        {% for todo in user.completed_todos %}
+        <li class="list-group-item" style="text-align:left;">
+        <span style="margin-right:1rem; font-size:1.2rem;">•</span>
+        <span class="text-break">{{ todo.text }}</span>
+        <div class="btn-group dropdown">
+            <button type="button" style="padding:3px 3px; padding-right:8px; margin-left:0.25rem;" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-lg" viewBox="0 0 16 16">
+                    <path d="m10.277 5.433-4.031.505-.145.67.794.145c.516.123.619.309.505.824L6.101 13.68c-.34 1.578.186 2.32 1.423 2.32.959 0 2.072-.443 2.577-1.052l.155-.732c-.35.31-.866.434-1.206.434-.485 0-.66-.34-.536-.939l1.763-8.278zm.122-3.673a1.76 1.76 0 1 1-3.52 0 1.76 1.76 0 0 1 3.52 0z"/>
+                </svg>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li><b>Creation Date:</b> <br>{{ moment(todo.creation_date).format('MMMM Do YYYY, h:mm A') }}</li>
+                <hr>
+                <li><b>Completion Date:</b> <br>{{ moment(todo.completion_date).format('MMMM Do YYYY, h:mm A') }}</li>
+            </ul>
+        </div>
+        <button type="button" class="btn-close" onClick="deleteCompleted({{ todo.id }})" style="float:right; vertical-align:middle; padding-top:11px;"></button>
+        </li>
+        {% endfor %}
+    </ul>
+    <br>
+    <hr>
+{% endblock %}
+
+{% block footer %}
+    <footer style="font-size:0.75rem; font-style:italic; font-weight:bold;">Current date and time: {{ moment().format('MMMM Do YYYY, h:mm A') }}</footer>
+{% endblock %}

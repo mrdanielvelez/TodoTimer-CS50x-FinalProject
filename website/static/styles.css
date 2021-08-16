@@ -1,0 +1,118 @@
+main {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.feature-title {
+    font-family: "Lato", Helvetica, sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.time-input {
+    width: 80px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.time-input::-webkit-outer-spin-button,
+.time-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.time-input {
+    -moz-appearance: textfield;
+}
+
+#reg-link {
+    color: black; 
+    text-decoration: none;
+}
+
+#reg-link:hover {
+    text-decoration: underline;
+}
+
+.time {
+    font-size: 4rem;
+}
+
+label {
+    margin-bottom:0.5rem;
+    margin-top: 0.5rem;
+}
+
+svg {
+    vertical-align: middle;
+    margin-bottom: 3px;
+    margin-right: 1px;
+}
+
+.form-input {
+    max-width: 7rem;
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid black;
+    padding: 5px 10px;
+    font-size: inherit;
+    font-weight: bold;
+    text-align: center;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.btn {
+    font-size: 1.1rem;
+    padding: 10px 10px;
+}
+
+.unit {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.timer-button {
+    border-radius: 50%;
+    padding: 1rem;
+    margin-left: 0.25rem;
+}
+
+nav .navbar-brand
+{
+    /* size for brand */
+    font-size: xx-large;
+}
+
+/* Colors for brand */
+nav .navbar-brand .red
+{
+    color: rgb(255, 60, 60);
+}
+
+#add-todo {
+    background-color: rgb(90, 7, 146);
+    border-color: rgb(90, 7, 146);
+}
+
+.btn-danger {
+    background-color: #991522;
+    border-color: #991522;
+}
+
+#add-todo:focus {
+    box-shadow: none;
+}
+
+nav .navbar-brand .white
+{
+    color: white;
+}
+
+body
+{
+    overflow-x: auto;
+    text-align: center;
+}
