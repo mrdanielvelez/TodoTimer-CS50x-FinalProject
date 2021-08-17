@@ -45,11 +45,12 @@ const completed = (preview=false) => {
     if (preview) {
         completionSound.play();
         completionSound.loop = false;
+        end = null;
     }
     else {
         completionSound.play();
-        completionSound.loop = true;
         toggleHourglass();
+        completionSound.loop = true;
     }
 }
 
@@ -60,7 +61,6 @@ const stopComplete = (stop=false) => {
         completionSound.currentTime = 0;
         if (stop && end) {
             stopSound.play();
-            end = null;
         }
         completionSound = null;
     }
