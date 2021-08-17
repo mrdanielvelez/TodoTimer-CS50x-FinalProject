@@ -6,15 +6,18 @@ let time = 0;
 let pause = 0;
 
 // Sound directory paths
-const sound_dir = "static/sounds";
-const tone_dir = `${sound_dir}/timer_complete`;
+const soundDir = "static/sounds";
+const toneDir = `${soundDir}/timer_complete`;
 
-// Button Sound Effects
-const startSound = new Audio(`${sound_dir}/start.wav`);
-const pauseSound = new Audio(`${sound_dir}/pause.wav`);
-const resumeSound = new Audio(`${sound_dir}/resume.wav`);
-const resetSound = new Audio(`${sound_dir}/reset.wav`);
-const stopSound = new Audio(`${sound_dir}/stop.wav`);
+// Button sound effects
+const startSound = new Audio(`${soundDir}/start.wav`);
+const pauseSound = new Audio(`${soundDir}/pause.wav`);
+const resumeSound = new Audio(`${soundDir}/resume.wav`);
+const resetSound = new Audio(`${soundDir}/reset.wav`);
+const stopSound = new Audio(`${soundDir}/stop.wav`);
+
+// Number of times to repeat completion sound
+const soundRepeat = 15;
 
 // Change hourglass icon based on timer
 const toggleHourglass = (state="end") => {
@@ -41,7 +44,7 @@ const toggleHourglass = (state="end") => {
 const completed = (preview=false) => {
     stopComplete();
     const completionTone = document.getElementById("sound-selection").value;
-    completionSound = new Audio(`${tone_dir}/${completionTone}.wav`);
+    completionSound = new Audio(`${toneDir}/${completionTone}.wav`);
     if (preview) {
         completionSound.loop = false;
     }
@@ -57,10 +60,11 @@ const stopComplete = (stop=false) => {
     if (completionSound) {
         completionSound.pause();
         completionSound.currentTime = 0;
-        if (stop) {
+        if (stop && end) {
             stopSound.play();
-            completionSound = null;
+            end = null;
         }
+        completionSound = null;
     }
 }
 

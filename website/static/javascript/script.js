@@ -1,10 +1,10 @@
 const minTodoLen = 5;
 const maxTodoLen = 200;
 
-const todo_sound_dir = "static/sounds/todo";
+const todoSoundDir = "static/sounds/todo";
 
-const deleteTodoSound = new Audio(`${todo_sound_dir}/delete.wav`);
-const completeTodoSound = new Audio(`${todo_sound_dir}/complete.wav`);
+const deleteTodoSound = new Audio(`${todoSoundDir}/delete.wav`);
+const completeTodoSound = new Audio(`${todoSoundDir}/complete.wav`);
 
 // Add Todo in SQL database
 const addTodo = () => {

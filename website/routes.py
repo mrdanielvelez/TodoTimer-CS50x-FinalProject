@@ -19,7 +19,7 @@ def index():
         filepath = os.path.join(SOUND_DIR, filename)
         if os.path.isfile(filepath):
             sounds.append(filename.split(".")[0])
-    return render_template("index.html", user=current_user, sounds=sounds)
+    return render_template("index.html", user=current_user, sounds=sorted(sounds))
 
 @routes.route("/completions")
 @login_required

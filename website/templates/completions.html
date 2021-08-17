@@ -20,9 +20,9 @@
                 </svg>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li><b>Creation Date:</b> <br>{{ moment(todo.creation_date).format('MMMM Do YYYY, h:mm A') }}</li>
+                <li align="center"><b>Creation Date:</b> <br>{{ moment(todo.creation_date).format('MMMM Do YYYY, h:mm A') }}</li>
                 <hr>
-                <li><b>Completion Date:</b> <br>{{ moment(todo.completion_date).format('MMMM Do YYYY, h:mm A') }}</li>
+                <li align="center"><b>Completion Date:</b> <br>{{ moment(todo.completion_date).format('MMMM Do YYYY, h:mm A') }}</li>
             </ul>
         </div>
         <button type="button" class="btn-close" onClick="deleteCompleted({{ todo.id }})" style="float:right; vertical-align:middle; padding-top:11px;"></button>

@@ -12,7 +12,7 @@
             <li class="list-group-item" style="text-align:left;">
             <span style="margin-right:1rem; font-size:1.2rem;">•</span>
             <span class="text-break">{{ todo.text }}</span>
-            <button type="button" class="btn btn-outline-success" onClick="completeTodo({{ todo.id }})" style="border:none; padding:2px 6px;">
+            <button type="button" class="btn btn-outline-success" onClick="completeTodo({{ todo.id }})" style="border:none; padding:3px 0px; margin-bottom:3px;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16">
                     <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/>
                     <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/>
@@ -31,7 +31,7 @@
                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                 <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
             </svg>
-            <span class="button-text">Add Todo</span>
+            Add Todo
             </button>
         </div>
     </div>
@@ -44,25 +44,25 @@
         </h2>
         <div class="container-xxl time mb-2">
             <div>
-                <span id="hrs">
-                    <span class="col-4" id="h">0</span><span class="unit">h</span>
+                <span>
+                    <span class="col-4" id="h">0</span><span class="unit">h<span style="display: none">abcdefg</span></span>
                 </span>
-                <span id="mins">
+                <span>
                     <span class="col-4" id="m">0</span><span class="unit">m</span>
                 </span>
-                <span id="secs">
+                <span>
                     <span class="col-4" id="s">0</span><span class="unit">s</span>
                 </span>
             </div>
         </div>
         <hr style="margin:auto;">
         <br>
-        <form class="input-group mb-4" id="inputs">
+        <form class="container input-group mb-4" id="inputs">
             <input class="labelmax form-control" type="number" min="0" max="23" name="hours" id="hours" placeholder="Hours">
             <input class="labelmax form-control" type="number" min="0" max="59" name="minutes" id="minutes" placeholder="Minutes">
             <input class="labelmax form-control" type="number" min="0" max="59" name="seconds" id="seconds" placeholder="Seconds">
         </form>
-        <div class="btn-group btn-group-lg" role="group">
+        <div class="container btn-group" role="group">
             <button id="start" type="button" class="btn btn-danger" onClick="startTimer()">
                 <svg style="transform: scaleX(-1);" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-alarm" viewBox="0 0 16 16">
                     <path d="M8.5 5.5a.5.5 0 0 0-1 0v3.362l-1.429 2.38a.5.5 0 1 0 .858.515l1.5-2.5A.5.5 0 0 0 8.5 9V5.5z"/>
@@ -89,7 +89,7 @@
     <br>
     <hr style="margin:auto;">
     <br>
-    <div id="sound" class="container-xxl mb-4">
+    <div id="sound" class="container mb-4">
         <div class="row">
             <div class="form-floating col-6 col-sm-10">
                 <select class="form-select" id="sound-selection" aria-label="Sound selection">
@@ -97,7 +97,7 @@
                     <option value="{{ sound }}">{{ sound }}</option>
                     {% endfor %}
                 </select>
-                <label for="sound-selection" style="padding: 0.25rem 1.5rem; font-size: 0.9rem;">Completion Tone</label>
+                <label for="sound-selection" style="padding: 0.25rem 1.5rem; margin-left:0.1575rem; font-size: 0.9rem;">Completion Tone</label>
             </div>
             <button type="button" class="btn btn-outline-dark col" style="margin-right:1rem;" onClick="completed(preview=true);">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-music-note-beamed" viewBox="0 0 16 16">
