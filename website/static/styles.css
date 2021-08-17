@@ -99,13 +99,3 @@ body
     overflow-x: auto;
     text-align: center;
 }
-
-a[x-apple-data-detectors] {
-    cursor: not-allowed !important;
-    pointer-events: none !important;
-    text-decoration: none !important;
-    padding: none !important;
-    border: none !important;
-    opacity: 0 !important;
-    display: none !important;
-}
