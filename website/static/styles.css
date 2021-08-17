@@ -100,11 +100,12 @@ body
     text-align: center;
 }
 
-span[x-apple-data-detectors] {
-    opacity: 0 !important;
+a[x-apple-data-detectors] {
     cursor: not-allowed !important;
     pointer-events: none !important;
     text-decoration: none !important;
+    padding: none !important;
     border: none !important;
+    opacity: 0 !important;
     display: none !important;
 }

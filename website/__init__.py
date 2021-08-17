@@ -19,13 +19,14 @@ def create_app():
 
     from .routes import routes
     from .auth import auth
+    from .models import User
 
     app.register_blueprint(routes, url_prefix="/")
     app.register_blueprint(auth, url_prefix="/")
 
-    from .models import User, Todo, Completed_Todo
-
     create_database(app)
+
+    moment.init_app(app)
 
     login_manager = LoginManager()
     login_manager.login_view = "auth.login"
@@ -36,9 +37,7 @@ def create_app():
     @login_manager.user_loader
     def load_user(id):
         return User.query.get(int(id))
-
-    moment.init_app(app)
-
+        
     return app
 
 def create_database(app):
