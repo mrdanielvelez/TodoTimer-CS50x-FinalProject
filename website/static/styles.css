@@ -17,6 +17,13 @@ main {
     text-decoration: underline;
 }
 
+.iOSBug {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+    pointer-events: none;
+}
+
 .time {
     font-size: 4rem;
 }
