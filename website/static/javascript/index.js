@@ -1,4 +1,4 @@
-// Sound directory paths
+// Sound directories
 const soundDir = "static/sounds";
 const toneDir = `${soundDir}/timer_complete`;
 
@@ -37,12 +37,14 @@ const secondsIn = document.getElementById("seconds");
 const inputs = document.getElementById("inputs");
 
 // Change hourglass icon and preview section based on timer
-const toggleHourglass = (state="end") => {
+const toggle = (state="end") => {
     switch (state) {
         case "beginning":
             $("#hourglass").removeClass("bi-hourglass-bottom");
             $("#hourglass").addClass("bi-hourglass-top");
             $("#hour-glass-path").attr("d", "M2 14.5a.5.5 0 0 0 .5.5h11a.5.5 0 1 0 0-1h-1v-1a4.5 4.5 0 0 0-2.557-4.06c-.29-.139-.443-.377-.443-.59v-.7c0-.213.154-.451.443-.59A4.5 4.5 0 0 0 12.5 3V2h1a.5.5 0 0 0 0-1h-11a.5.5 0 0 0 0 1h1v1a4.5 4.5 0 0 0 2.557 4.06c.29.139.443.377.443.59v.7c0 .213-.154.451-.443.59A4.5 4.5 0 0 0 3.5 13v1h-1a.5.5 0 0 0-.5.5zm2.5-.5v-1a3.5 3.5 0 0 1 1.989-3.158c.533-.256 1.011-.79 1.011-1.491v-.702s.18.101.5.101.5-.1.5-.1v.7c0 .701.478 1.236 1.011 1.492A3.5 3.5 0 0 1 11.5 13v1h-7z");
+            previewButton.disabled = true;
+            soundDropdown.disabled = true;
             break;
         case "middle":
             $("#hourglass").removeClass("bi-hourglass-top");
@@ -53,6 +55,8 @@ const toggleHourglass = (state="end") => {
             $("#hourglass").removeClass("bi-hourglass-split");
             $("#hourglass").addClass("bi-hourglass-bottom");
             $("#hour-glass-path").attr("d", "M2 1.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1h-11a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1-.5-.5zm2.5.5v1a3.5 3.5 0 0 0 1.989 3.158c.533.256 1.011.791 1.011 1.491v.702s.18.149.5.149.5-.15.5-.15v-.7c0-.701.478-1.236 1.011-1.492A3.5 3.5 0 0 0 11.5 3V2h-7z");
+            previewButton.disabled = false;
+            soundDropdown.disabled = false;
             break;
     } 
 }
@@ -76,9 +80,7 @@ const completed = (preview=false) => {
     else {
         completionSound.loop = true;
         completionSound.play();
-        toggleHourglass();
-        previewButton.disabled = false;
-        soundDropdown.disabled = false;
+        toggle();
     }
     completionSound.play();
 }
@@ -130,13 +132,11 @@ const updateCountdown = () => {
         countdownHour.innerText = `${hours}`;
         countdownMinute.innerText = `${minutes}`;
         countdownSecond.innerText = `${seconds}`;
-        if (time === halftime) toggleHourglass("middle");
+        if (time === halftime) toggle("middle");
         // Increment timer
         time--;
         time === 0 ? end = true : end = false;
         active = true;
-        previewButton.disabled = true;
-        soundDropdown.disabled = true;
     }
 }
 
@@ -156,7 +156,7 @@ const startTimer = () => {
             updateCountdown();
             setCountdown = setInterval(updateCountdown, 1000);
             startSound.play();
-            toggleHourglass(state="beginning");
+            toggle(state="beginning");
             clearInput();
             configCompletion();
         }
