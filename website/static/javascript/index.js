@@ -16,9 +16,6 @@ const resumeSound = new Audio(`${soundDir}/resume.wav`);
 const resetSound = new Audio(`${soundDir}/reset.wav`);
 const stopSound = new Audio(`${soundDir}/stop.wav`);
 
-// Number of times to repeat completion sound
-const soundRepeat = 15;
-
 // Change hourglass icon based on timer
 const toggleHourglass = (state="end") => {
     switch (state) {
@@ -46,13 +43,14 @@ const completed = (preview=false) => {
     const completionTone = document.getElementById("sound-selection").value;
     completionSound = new Audio(`${toneDir}/${completionTone}.wav`);
     if (preview) {
+        completionSound.play();
         completionSound.loop = false;
     }
     else {
+        completionSound.play();
         completionSound.loop = true;
         toggleHourglass();
     }
-    completionSound.play();
 }
 
 // Stop completion sound repeat/loop
