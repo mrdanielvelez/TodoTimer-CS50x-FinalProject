@@ -61,6 +61,7 @@ const toggle = (state="end") => {
     } 
 }
 
+// Ensure completion audio gets played on mobile
 const configCompletion = () => {
     completionTone = document.getElementById("sound-selection").value;
     completionSound = new Audio(`${toneDir}/${completionTone}.wav`);
