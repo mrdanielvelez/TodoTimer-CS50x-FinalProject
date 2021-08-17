@@ -42,16 +42,8 @@ const completed = (preview=false) => {
     stopComplete();
     const completionTone = document.getElementById("sound-selection").value;
     completionSound = new Audio(`${toneDir}/${completionTone}.wav`);
-    if (preview) {
-        completionSound.play();
-        completionSound.loop = false;
-        end = null;
-    }
-    else {
-        completionSound.play();
-        toggleHourglass();
-        completionSound.loop = true;
-    }
+    if (!preview) toggleHourglass();
+    completionSound.play();
 }
 
 // Stop completion sound repeat/loop
