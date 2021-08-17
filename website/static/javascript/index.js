@@ -1,13 +1,15 @@
-let setCountdown, completionSound, 
+// Sound directory paths
+const soundDir = "static/sounds";
+const toneDir = `${soundDir}/timer_complete`;
+
+let setCountdown,
 active, halftime, end
 hours, minutes, seconds;
 
 let time = 0;
 let pause = 0;
-
-// Sound directory paths
-const soundDir = "static/sounds";
-const toneDir = `${soundDir}/timer_complete`;
+let completionTone = document.getElementById("sound-selection").value;
+let completionSound = new Audio(`${toneDir}/${completionTone}.wav`);
 
 // Button sound effects
 const startSound = new Audio(`${soundDir}/start.wav`);
@@ -16,7 +18,25 @@ const resumeSound = new Audio(`${soundDir}/resume.wav`);
 const resetSound = new Audio(`${soundDir}/reset.wav`);
 const stopSound = new Audio(`${soundDir}/stop.wav`);
 
-// Change hourglass icon based on timer
+// Pause/Resume button
+const pauseButton = document.getElementById("toggle");
+
+// Preview button and dropdown
+const previewButton = document.getElementById("preview-button");
+const soundDropdown = document.getElementById("sound-selection");
+
+// Timer elements
+const countdownHour = document.getElementById("h");
+const countdownMinute = document.getElementById("m");
+const countdownSecond = document.getElementById("s");
+
+// Input to timer
+const hoursIn = document.getElementById("hours");
+const minutesIn = document.getElementById("minutes");
+const secondsIn = document.getElementById("seconds");
+const inputs = document.getElementById("inputs");
+
+// Change hourglass icon and preview section based on timer
 const toggleHourglass = (state="end") => {
     switch (state) {
         case "beginning":
@@ -37,12 +57,29 @@ const toggleHourglass = (state="end") => {
     } 
 }
 
-// Completion Sound Effect
+const configCompletion = () => {
+    completionTone = document.getElementById("sound-selection").value;
+    completionSound = new Audio(`${toneDir}/${completionTone}.wav`);
+    completionSound.play();
+    completionSound.pause();
+    completionSound.currentTime = 0;
+}
+
+// Completion sound effect
 const completed = (preview=false) => {
     stopComplete();
-    const completionTone = document.getElementById("sound-selection").value;
-    completionSound = new Audio(`${toneDir}/${completionTone}.wav`);
-    if (!preview) toggleHourglass();
+    if (preview) {
+        completionTone = document.getElementById("sound-selection").value;
+        completionSound = new Audio(`${toneDir}/${completionTone}.wav`);
+        completionSound.play();
+    }
+    else {
+        completionSound.loop = true;
+        completionSound.play();
+        toggleHourglass();
+        previewButton.disabled = false;
+        soundDropdown.disabled = false;
+    }
     completionSound.play();
 }
 
@@ -53,26 +90,12 @@ const stopComplete = (stop=false) => {
         completionSound.currentTime = 0;
         if (stop && end) {
             stopSound.play();
+            end = null;
         }
-        completionSound = null;
     }
 }
 
-// Pause/Resume button
-const toggle = document.getElementById("toggle");
-
-// Timer elements
-const countdownHour = document.getElementById("h");
-const countdownMinute = document.getElementById("m");
-const countdownSecond = document.getElementById("s");
-
-// Input to timer
-const hoursIn = document.getElementById("hours");
-const minutesIn = document.getElementById("minutes");
-const secondsIn = document.getElementById("seconds");
-const inputs = document.getElementById("inputs");
-
-// Clears input fields
+// Clear input fields
 const clearInput = () => {
     hoursIn.value = "";
     minutesIn.value = "";
@@ -112,6 +135,8 @@ const updateCountdown = () => {
         time--;
         time === 0 ? end = true : end = false;
         active = true;
+        previewButton.disabled = true;
+        soundDropdown.disabled = true;
     }
 }
 
@@ -133,6 +158,7 @@ const startTimer = () => {
             startSound.play();
             toggleHourglass(state="beginning");
             clearInput();
+            configCompletion();
         }
     }
 }
@@ -147,15 +173,15 @@ const pauseTimer = () => {
         countdownHour.innerText = `${hours}`;
         countdownMinute.innerText = `${minutes}`;
         countdownSecond.innerText = `${seconds}`;
-        toggle.innerHTML = "Resume";
+        pauseButton.innerHTML = "Resume";
         active = false;
         pauseSound.play();
     }
-    else if (toggle.innerHTML === "Resume") {
+    else if (pauseButton.innerHTML === "Resume") {
         time = pause;
         setCountdown = setInterval(updateCountdown, 1000);
         updateCountdown();
-        toggle.innerHTML = "Pause";
+        pauseButton.innerHTML = "Pause";
         resumeSound.play();
     }
 }
@@ -165,7 +191,7 @@ const resetTimer = () => {
     if (countdownHour.innerHTML != 0 || countdownMinute.innerHTML != 0 || countdownSecond.innerHTML != 0) {
         time = 0;
         pause = 0;
-        toggle.innerHTML = "Pause";
+        pauseButton.innerHTML = "Pause";
         reset(clear=false);
         resetSound.play();
     }
