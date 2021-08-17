@@ -83,9 +83,6 @@ $(document).ready(() => {
 $(document).ready(() => {
     $("a").removeClass("active");
     $(path != "/" ? `#${path.substring(1)}` : "#home").addClass("active");
-});
-
-// Fix annoying bug on iOS
-$(document).ready(() => {
-    $("a").removeClass("x-apple-data-detectors");
+    // Fix annoying bug on iOS
+    $("a").attr("x-apple-data-detectors", "false");
 });
