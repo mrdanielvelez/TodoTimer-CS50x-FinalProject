@@ -65,8 +65,11 @@ const toggle = (state="end") => {
 const configCompletion = () => {
     completionTone = document.getElementById("sound-selection").value;
     completionSound = new Audio(`${toneDir}/${completionTone}.wav`);
-    completionSound.play();
-    completionSound.pause();
+    // Load then play completionSound to prepare Audio object
+    completionSound.play().then(
+        completionSound.pause()
+        // Catch console error message
+        ).catch(() => console.log());
     completionSound.currentTime = 0;
 }
 
