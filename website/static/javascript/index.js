@@ -115,6 +115,7 @@ const reset = (clear=true) => {
     if (active && clear) clearInput();
     if (end) completed();
     active = false;
+    toggle();
 }
 
 const updateCountdown = () => {
