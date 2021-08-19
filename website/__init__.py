@@ -2,7 +2,6 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_moment import Moment
-from os import path
 import os
 
 db = SQLAlchemy()
@@ -13,7 +12,7 @@ moment = Moment()
 def create_app():
     app = Flask(__name__)
     app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY") or os.urandom(12).hex()
-    app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_NAME}" or os.environ.get("DATABASE_URL").replace("://", "ql://", 1)
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL").replace("://", "ql://", 1) or f"sqlite:///{DB_NAME}"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.init_app(app)
 
@@ -41,6 +40,6 @@ def create_app():
     return app
 
 def create_database(app):
-    if not path.exists(f"website/{DB_NAME}") and not os.environ.get("DATABASE_URL"):
+    if not os.path.exists(f"website/{DB_NAME}") and not os.environ.get("DATABASE_URL"):
         db.create_all(app=app)
         print("Initialized Database")
